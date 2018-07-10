@@ -1,3 +1,5 @@
+
+
 const BigNumber = web3.BigNumber;
 var ethUtil = require('ethereumjs-util')
 var Tx = require('ethereumjs-tx');
@@ -8,6 +10,7 @@ const should = require('chai')
     .should();
 
 import expectThrow from './helpers/expectThrow';
+
 
 var VoteFactory = artifacts.require("./VoteFactory.sol");
 
@@ -43,39 +46,10 @@ contract('VoteFactory', function(accounts) {
         await expectThrow(voteFactory.addAnswer(0, answer0, {from: user}));
     });
     
+    it('creates answer for not existing vote', async function () {
+        await voteFactory.createVote(question0, {from: creator});
+        await expectThrow(voteFactory.addAnswer(1, answer0, {from: creator}));
+    });
 
-    // it('attack', async function () {
-    //     var from = 0x01d9D1Ac7ebd965dBf0cbBdc5Ef5093DedA7f602;
-    //     var from_bytes = "01d9D1Ac7ebd965dBf0cbBdc5Ef5093DedA7f602";
-    //     var to = 0x01d9D1Ac7ebd965dBf0cbBdc5Ef5093DedA7f602;
-    //     var to_bytes = "01d9D1Ac7ebd965dBf0cbBdc5Ef5093DedA7f602";
-    //     var value = 100;
-    //     var value_bytes = "8fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff";
-    //     var feeSmt = 2;
-    //     var feeSmt_bytes = "7000000000000000000000000000000000000000000000000000000000000001";
-    //     var nonce = 0;
-    //     var nonce_bytes = "0000000000000000000000000000000000000000000000000000000000000000";
-    //     var msgBuffer = ethUtil.sha3("0x" + from_bytes + to_bytes + value_bytes + feeSmt_bytes + nonce_bytes)
-    //     var messagetoSign = ethUtil.bufferToHex(msgBuffer)
-    //     var messagetoSend = ethUtil.bufferToHex(ethUtil.hashPersonalMessage(msgBuffer)) 
-
-    //     const unlockedAccount = accounts[0]
-    //     var privkey = new Buffer('28780b50f222df8539903fc88f66cb02a602d9c1b8fc84e0e297cf51f7ca5911', 'hex');
-
-    //     var vrs = ethUtil.ecsign(msgBuffer, privkey);
-    //     let v = vrs.v.toString()
-    //     let r = ethUtil.bufferToHex(vrs.r)
-    //     let s = ethUtil.bufferToHex(vrs.s)
-
-    //     console.log(' msg2sign: ' + messagetoSign)        
-    //     console.log(' msg2send: ' + messagetoSend)    
-    //     console.log()
-    //     console.log(v)
-    //     console.log(r)
-    //     console.log(s)
-    //     // console.log(ethUtil.publicToAddress(ethUtil.ecrecover(msgBuffer, v, r, s)).toString('hex'))    
-        
-    //     const recoveredAddress = await this.contract.transferProxy(from, to, value, feeSmt, v, r, s)
-    //     recoveredAddress.should.be.equal(unlockedAccount,'The recovered address should match the signing address')
-    // });
+    
 });

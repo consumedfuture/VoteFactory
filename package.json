@@ -13,11 +13,12 @@
     "eslint-plugin-react": "^7.7.0",
     "ethereumjs-util": "^5.1.5",
     "ethereumjs-wallet": "^0.6.0",
-    "web3": "^1.0.0-beta.33",
+    "web3": "^1.0.0-beta.34",
     "web3-provider-engine": "^14.0.4",
     "zeppelin-solidity": "^1.8.0"
   },
   "devDependencies": {
+
     "babel-polyfill": "^6.23.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-es2015": "^6.18.0",
